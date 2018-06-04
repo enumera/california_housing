@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May 31 18:43:47 2018
+
+@author: enumera-air
+"""
+
+#Select a model and train it
+
+from sklearn.linear_model import LinearRegression
+
+lin_reg = LinearRegression()
+
+lin_reg.fit(housing_prepared, housing_labels)
+
+#trying out the lin_reg
+
+some_data = housing_prepared.iloc[:5]
+some_labels = housing_labels.iloc[:5]
+
+print("Predictions: ", lin_reg.predict(some_data))
+
+print("Labels:", list(some_labels))
+
+
+housing_predictions = lin_reg.predict(housing_prepared)
+lin_mse = mean_squared_error(housing_labels, housing_predictions)
+lin_rmse = np.sqrt(lin_mse)
+lin_rmse
+
+cross_validate(lin_reg, housing_prepared, housing_labels)
+

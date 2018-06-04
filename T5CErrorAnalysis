@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  3 23:22:05 2018
+
+@author: enumera-air
+"""
+
+#Error Analysis on Multivariate
+
+y_train_pred = cross_val_predict(sgd_clf, X_train_scaled, y_train, cv=3)
+conf_mx = confusion_matrix(y_train, y_train_pred)
+conf_mx
+
+#show the error matrix
+plt.matshow(conf_mx, cmap=plt.cm.gray)
+plt.show()
+
+#Show the error matrix
+row_sums = conf_mx.sum(axis=1, keepdims=True)
+norm_conf_mx = conf_mx / row_sums
+np.fill_diagonal(norm_conf_mx, 0)
+plt.matshow(norm_conf_mx, cmap=plt.cm.gray)
+plt.show()

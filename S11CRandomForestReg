@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May 31 21:08:52 2018
+
+@author: enumera-air
+"""
+
+#RandomForestRegressor
+
+forest_reg = RandomForestRegressor()
+
+forest_reg.fit(housing_prepared, housing_labels)
+
+housing_predictions = forest_reg.predict(housing_prepared)
+forest_mse = mean_squared_error(housing_labels, housing_predictions)
+forest_rmse = np.sqrt(forest_mse)
+forest_rmse
+
+print("Predictions: ", forest_reg.predict(some_data))
+
+print("Labels:", list(some_labels))
+
+
+cross_validate(forest_reg, housing_prepared, housing_labels)

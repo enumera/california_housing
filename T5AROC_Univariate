@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  3 22:02:07 2018
+
+@author: enumera-air
+"""
+
+#roc_curve
+
+from sklearn.metrics import roc_curve
+
+fpr, tpr, thresholds = roc_curve(y_train_5, y_scores)
+
+def plot_roc_curve(fpr, tpr, label=None):
+    plt.plot(fpr, tpr, linewidth=2, label=label)
+    plt.plot([0,1], [0,1], 'k--')
+    plt.axis([0,1,0,1])
+    plt.xlabel('False positive rate')
+    plt.ylabel('True positive rate')
+    
+plot_roc_curve(fpr, tpr)
+plt.show()
+
+from sklearn.metrics import roc_auc_score
+
+roc_auc_score(y_train_5, y_scores)
+
+from sklearn.ensemble import RandomForestClassifier
+
+forest_clf = RandomForestClassifier(random_state=42)
+
+y_probas_forest = cross_val_predict(forest_clf, X_train, y_train_5, cv=3, method='predict_proba')
+
+y_scores_forest = y_probas_forest[:,1] #score = proba of a positive class
+fpr_forest, tpr_forest, thresholds_forest = roc_curve(y_train_5, y_scores_forest)
+
+plt.plot(fpr, tpr, 'b:', label='SGD')
+plot_roc_curve(fpr_forest, tpr_forest, 'Random Forest')
+plt.legend(loc='lower right')
+plt.show()
+
+roc_auc_score(y_train_5, y_scores_forest)

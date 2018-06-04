@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May 31 14:40:04 2018
+
+@author: enumera-air
+"""
+
+#Preparing the data for machine learning
+
+#take a clean copy of the stratified training set.
+
+housing = strat_train_set.drop("median_house_value", axis=1)
+housing_labels = strat_train_set["median_house_value"]
+
+#When filling missing variables with the mean, median etc. when the 
+#Imputer calculates the value to use remember to save it to apply it to 
+#the test set.
+
+from sklearn.preprocessing import Imputer
+
+imputer = Imputer(strategy = "median")
+
+#Remove the categorical labelled data as the imputer will break otherwise
+housing_id = housing["ID"]
+
+housing_num = housing.drop(["ID","ocean_proximity"], axis=1)
+
+imputer.fit(housing_num)
+
+imputer.statistics_
+housing_num.median().values
+
+X=imputer.transform(housing_num)
+
+housing_tr = pd.DataFrame(X, columns=housing_num.columns)
+
+housing_col = housing_tr.columns.tolist
+
+std_scaler = StandardScaler()
+
+housing[housing_col] = std_scaler.fit_transform(housing[housing_col])
+
+#housing_num_tr["ID"] = housing_id.values
+
+#housing_num_tr.head()
+
+
+
+
+

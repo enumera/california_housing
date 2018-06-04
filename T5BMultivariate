@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  3 23:03:59 2018
+
+@author: enumera-air
+"""
+
+#Multivariate classification
+
+sgd_clf.fit(X_train, y_train)
+sgd_clf.predict([some_digit])
+
+some_digit_scores = sgd_clf.decision_function([some_digit])
+some_digit_scores
+
+np.argmax(some_digit_scores)
+
+sgd_clf.classes_
+sgd_clf.classes_[5]
+
+from sklearn.multiclass import OneVsOneClassifier
+
+ovo_clf = OneVsOneClassifier(SGDClassifier(random_state=42))
+
+ovo_clf.fit(X_train, y_train)
+
+ovo_clf.predict([some_digit])
+
+len(ovo_clf.estimators_)
+
+#Training a RandomForestClassifier
+
+forest_clf.fit(X_train, y_train)
+forest_clf.predict([some_digit])
+
+forest_clf.predict_proba([some_digit])
+
+
+#Evaluate the classifiers
+
+cross_val_score(sgd_clf, X_train, y_train, cv=3, scoring='accuracy')
+
+
+#Scale the inputs will increase the score
+
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+
+X_train_scaled = scaler.fit_transform(X_train.astype(np.float64))
+
+
+cross_val_score(sgd_clf, X_train_scaled, y_train, cv=3, scoring='accuracy')

@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May 31 13:29:38 2018
+
+@author: enumera-air
+"""
+
+#data_interrogation
+
+
+#S2.1 Get the data
+fetch_housing_data()
+housing = load_housing_data()
+
+#S2.2 View the basic information about the data and add an ID
+housing.insert(0, 'ID', 10000+housing.index)
+housing.head()
+housing.info()
+
+#S2.3 Investigate the categorical data - dtype - object
+
+housing['ocean_proximity'].value_counts()
+
+#S2.4 Get the statistics for the other fields
+
+housing.describe()
+
+housing.hist(bins=50, figsize=(20,15))
+plt.show()

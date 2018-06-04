@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu May 31 14:52:32 2018
+
+@author: enumera-air
+"""
+
+#Handling text and categorical attributes
+
+#encoder = LabelEncoder()
+
+#housing_cat = housing["ocean_proximity"]
+#housing_cat_encoded = encoder.fit_transform(housing_cat)
+#housing_cat_encoded
+
+#print(encoder.classes_)
+
+#Because the ML tools will calculate a difference between 0 and 4 this
+#will cause abberations in the data we must use one-hot endcoder to set
+#each of the possible category values to 0 or 1, independently of each other.
+
+#encoder = OneHotEncoder()
+
+#housing_cat_1hot = encoder.fit_transform(housing_cat_encoded.reshape(-1,1))
+
+#housing_cat_1hot
+
+#ocean_encoder = LabelBinarizer(sparse_output=False)
+#housing_cat_1hot = ocean_encoder.fit_transform(housing_cat)
+
+#housing_cat_1hot
+
+
+
+#get_dummies will recognise that the ID is not a categorical field and leave it.
+
+housing_cat_tr = pd.get_dummies(housing, prefix = ["ID",'ocean_proximity'], columns=["ID",'ocean_proximity'])
+
+#https://stackoverflow.com/questions/37265312/how-to-create-dummies-for-certain-columns-by-pandas-get-dummies-method
+housing.head()
+
+housing= housing.drop(["ID",'ocean_proximity'])
+housing.head()

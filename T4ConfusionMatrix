@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  3 20:14:51 2018
+
+@author: enumera-air
+"""
+
+#Confusion Matrix
+
+from sklearn.metrics import precision_score, recall_score
+
+precision_score(y_train_5, y_train_pred)
+
+y_train_pred = cross_val_predict(sgd_clf, X_train, y_train_5,cv=3)
+
+confusion_matrix(y_train_5, y_train_pred)
+
+y_scores = sgd_clf.decision_function([some_digit])
+y_scores
+
+threshold=2000000
+
+
+y_some_digit_pred = (y_scores > threshold)
+y_some_digit_pred
+
+
+y_scores =cross_val_predict(sgd_clf,X_train, y_train_5, cv=3, method='decision_function')
+
+if y_scores.ndim == 2:
+    y_scores = y_scores[:, 1]
+
+from sklearn.metrics import precision_recall_curve
+
+y_scores.shape
+y_train_5.shape
+
+precisions, recalls, thresholds= precision_recall_curve(y_train_5, y_scores)
+
+def plot_precision_recall_vs_threshold(precisions, recalls, thresholds):
+    plt.plot(thresholds, precisions[:-1],"b--",label='Precision')
+    plt.plot(thresholds, recalls[:-1],'g-', label='Recall')
+    plt.xlabel('Threshold')
+    plt.legend(loc='upper left')
+    plt.ylim([0,1])
+    
+plot_precision_recall_vs_threshold(precisions, recalls, thresholds)
+plt.show()
+
+y_train_pred_90 = (y_scores > 70000)
+
+precision_score(y_train_5, y_train_pred_90)
+recall_score(y_train_5, y_train_pred_90)
+
